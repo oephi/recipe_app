@@ -21,12 +21,18 @@ def welcome
 end
 
 def print_recipe_names
-    number = 1
-    @array_of_recipes.each do |i| 
-        # p "#{number} #{i.name}"
-        puts "#{number}" + "."" #{i.name}"
-        number += 1
-    end
+    puts "Please select from the following recipes: "
+    puts "-----------------------------------"
+    @number = 1
+    @numbers_array = [1]
+        @array_of_recipes.each do |i| 
+            # p "#{number} #{i.name}"
+            puts "#{@number}" + "."" #{i.name}"
+            @number += 1
+            @numbers_array << @number
+
+        end
+        @numbers_array.pop
 end
 
 def print_recipe
@@ -36,13 +42,32 @@ end
 
 def recipe_select
     puts "What is your selection?"
-    selection = gets.chomp
+    selection = gets.to_i
+    system "clear"
+        @numbers_array.each do |number|
+        if number == selection
+            selection -= 1
+            puts "You selected: #{@array_of_recipes[selection].name}! Correct? (y/n)"
+            yes_no = gets.chomp
+            if yes_no == "y"
+                puts "Ok! Let's get cook it!"
+            elsif yes_no == "n"
+                system "clear"
+                print_recipe_names
+                puts "------------------------------------"
+                # puts "What is your selection?"
+                # yes_no = gets.to_i
+                recipe_select
+            end
+        end
+    end
 end
 
 welcome
 
-puts "Please select from the following recipes: "
-puts "-----------------------------------"
+# puts "Please select from the following recipes: "
+# puts "-----------------------------------"
 print_recipe_names
 puts "------------------------------------"
 recipe_select
+
