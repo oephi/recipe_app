@@ -1,5 +1,6 @@
 require 'json'
 require_relative 'models/recipe'
+require 'rainbow'
 # require_relative 'logic'
 
 hash = JSON.parse(File.read('recipes.json'))
@@ -55,10 +56,20 @@ def recipe_select
                 system "clear"
                 print_recipe_names
                 puts "------------------------------------"
-                # puts "What is your selection?"
-                # yes_no = gets.to_i
+                recipe_select
+            else
+                system "clear"
+                puts Rainbow("Invalid Selection.  Please try again").red
+                print_recipe_names
+                puts "------------------------------------"
                 recipe_select
             end
+        elsif selection > @numbers_array.length
+            system "clear"
+            puts Rainbow("Invalid Selection.  Please try again").red
+            print_recipe_names
+            puts "------------------------------------"
+            recipe_select
         end
     end
 end
