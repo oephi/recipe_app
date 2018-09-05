@@ -67,8 +67,8 @@ def recipe_select
                 end
                 
                 ## Broken, please fix
-            elsif  @selection > @numbers_array.length
-                return_input("Invalid selection please try again")
+            elsif  @selection > @numbers_array.length || @selection <= 0 
+                 return_input("Invalid selection please try again")
             end
         end
     end
