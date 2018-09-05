@@ -55,10 +55,10 @@ Here is our initial thoughts and design ideas
 
 
 This is our work plan and trello boards:
-![trello](docs/Screen Shot 2018-09-04 at 8.42.51 pm.png)
-![trello2](docs/Screen Shot 2018-09-04 at 8.48.27 pm.png)
-![trello3](docs/Screen Shot 2018-09-05 at 10.46.25 am.png)
-![trello](docs/Screen Shot 2018-09-05 at 11.23.59 am.png)
+![trello](docs/trello1.png)
+![trello2](docs/trello2.png)
+![trello3](docs/trello3.png)
+![trello](docs/trello4.png)
 ![trello](docs/trello print.png)
 
 
