@@ -1,7 +1,7 @@
 require 'json'
 require_relative 'models/recipe'
 require 'rainbow'
-require 'tty-markdown'
+require 'terminal-table'
 # require_relative 'logic'
 
 hash = JSON.parse(File.read('recipes.json'))
@@ -24,16 +24,21 @@ end
 
 def print_recipe_names
     puts "Please select from the following recipes: "
-    puts "-----------------------------------"
+    puts " "
     @number = 1
     @numbers_array = [1]
+    rows = []
         @array_of_recipes.each do |i| 
             # p "#{number} #{i.name}"
-            puts "#{@number}" + "."" #{i.name}"
-            @number += 1
+            # puts "#{@number}" + "."" #{i.name}"
             @numbers_array << @number
+            rows << [@number, i.name]
+            @number += 1
         end
         @numbers_array.pop
+        table = Terminal::Table.new :title => "Recipes", :headings => ['Number', 'Name'], :rows => rows
+        puts table
+
 end
 
 def return_input(input)
@@ -48,7 +53,7 @@ def recipe_select
     puts "What is your selection?"
     @selection = gets.to_i
     system "clear"
-        @numbers_array.each do |number|
+    @numbers_array.each do |number|
         if number == @selection
             @selection -= 1
             puts "You selected: #{@array_of_recipes[@selection].name}! Correct? (y/n)"
@@ -63,7 +68,7 @@ def recipe_select
                return_input("Please try again")
             end
             ## Broken, please fix
-        elsif @selection > @numbers_array.length
+        elsif @selection > @numbers_array.length || @selection == 0
             return_input("Invalid selection please try again")
         end
     end
@@ -73,12 +78,18 @@ def display_ingredients
     puts "INGREDIENTS FOR #{@array_of_recipes[@selection].name}"
     puts ""
     input = 0
+    table = []
+    rows = []
     while input < @array_of_recipes[@selection].ingredients.length 
-        puts @array_of_recipes[@selection].ingredients[input]['quantity'] + " " + @array_of_recipes[@selection].ingredients[input]['name']
-        puts " "
+        # puts @array_of_recipes[@selection].ingredients[input]['quantity'] + " " + @array_of_recipes[@selection].ingredients[input]['name']
+        # puts " "
+        rows << [@array_of_recipes[@selection].ingredients[input]['quantity'], @array_of_recipes[@selection].ingredients[input]['name']]
         input += 1
     end
     @array_of_recipes[@selection].time
+    table = Terminal::Table.new :title => "INGREDIENTS", :headings => ['Number', 'Name'], :rows => rows
+    puts table
+    puts ""
 end
 
 def cooking_steps
