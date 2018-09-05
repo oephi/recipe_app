@@ -1,5 +1,4 @@
 ## Application logic
-
 require 'json'
 require_relative 'models/recipe'
 require 'rainbow'
@@ -36,9 +35,9 @@ def print_recipe_names
             @number += 1
         end
         @numbers_array.pop
+        ## Table
         table = Terminal::Table.new :title => "Recipes", :headings => ['Number', 'Name'], :rows => rows
         puts table
-
 end
 
 ## Used in the control flow of the recipe_select method to keep code DRY
@@ -89,7 +88,9 @@ def display_ingredients
         rows << [@array_of_recipes[@selection].ingredients[input]['quantity'], @array_of_recipes[@selection].ingredients[input]['name']]
         input += 1
     end
+    ## Calls the time method
     @array_of_recipes[@selection].time
+    ## Displays table
     table = Terminal::Table.new :title => "INGREDIENTS", :headings => ['Number', 'Name'], :rows => rows
     puts table
     puts ""
@@ -97,6 +98,26 @@ end
 
 
 ## iterates through the cooking steps and displays them step by step for the user
+# def cooking_steps
+#     input = 0 
+#     while input < @array_of_recipes[@selection].steps.length
+#         if input == 0
+#             input = 1
+#         else
+#             input
+#         end
+#         puts "Step #{input} of #{@array_of_recipes[@selection].steps.length - 1}" 
+#         puts Rainbow(@array_of_recipes[@selection].steps[input]).blue.bg(:white)
+#         puts ""
+#         puts "Press enter for next step or b to go back a step"    
+#         gets
+#         system "clear"
+#         display_ingredients
+#         input += 1
+#     end
+#     puts Rainbow("Bon apetit!").yellow
+#     puts ""
+# end
 def cooking_steps
     input = 0 
     while input < @array_of_recipes[@selection].steps.length
@@ -108,11 +129,17 @@ def cooking_steps
         puts "Step #{input} of #{@array_of_recipes[@selection].steps.length - 1}" 
         puts Rainbow(@array_of_recipes[@selection].steps[input]).blue.bg(:white)
         puts ""
-        puts "Press enter for next step"    
-        gets
-        system "clear"
-        display_ingredients
-        input += 1
+        puts "Press enter for next step or press 'b' and enter to go back a step"
+        selection = gets.strip    
+        if selection == "b"
+            system "clear"
+            display_ingredients
+            input -= 1
+        else
+            system "clear"
+            display_ingredients
+            input += 1
+        end
     end
     puts Rainbow("Bon apetit!").yellow
     puts ""
@@ -141,3 +168,5 @@ def app_logic
     cooking_steps
     restart
 end
+
+# p @array_of_recipes[0]
