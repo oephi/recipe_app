@@ -6,8 +6,6 @@ require 'terminal-table'
 
 hash = JSON.parse(File.read('recipes.json'))
 
-
-# p hash[0]['ingredients'][2]['name']
 @array_of_recipes = []
 hash.each do |recipe|
     @array_of_recipes << Recipe.new(recipe)
@@ -26,11 +24,9 @@ def print_recipe_names
     puts "Please select from the following recipes: "
     puts " "
     @number = 1
-    @numbers_array = [1]
+    @numbers_array = [0]
     rows = []
         @array_of_recipes.each do |i| 
-            # p "#{number} #{i.name}"
-            # puts "#{@number}" + "."" #{i.name}"
             @numbers_array << @number
             rows << [@number, i.name]
             @number += 1
@@ -46,30 +42,34 @@ def return_input(input)
     puts Rainbow(input).red
     print_recipe_names
     puts "------------------------------------"
-    recipe_select
 end
 
 def recipe_select
-    puts "What is your selection?"
-    @selection = gets.to_i
-    system "clear"
-    @numbers_array.each do |number|
-        if number == @selection
-            @selection -= 1
-            puts "You selected: #{@array_of_recipes[@selection].name}! Correct? (y/n)"
-            yes_no = gets.strip
-            if yes_no == "y"
-                puts "Ok! Let's get cook it!  Please press enter to see ingredients"
-                gets
-                system "clear"
-            elsif yes_no == "n"
-                return_input("")
-            else
-               return_input("Please try again")
+    while true
+        puts "What is your selection?"
+        @selection = gets.to_i
+        @selection -= 1
+        system "clear"
+        # p @selection
+        @numbers_array.each do |number|
+            if number == @selection
+                puts "You selected: #{@array_of_recipes[@selection].name}! Correct? (y/n)"
+                yes_no = gets.strip
+                if yes_no == "y" 
+                    puts "Ok! Let's get cook it!  Please press enter to see ingredients"
+                    gets
+                    system "clear"
+                    return 
+                elsif yes_no == "n" 
+                    return_input("") 
+                else
+                    return_input("Please try again")
+                end
+                
+                ## Broken, please fix
+            elsif  @selection > @numbers_array.length
+                return_input("Invalid selection please try again")
             end
-            ## Broken, please fix
-        elsif @selection > @numbers_array.length || @selection == 0
-            return_input("Invalid selection please try again")
         end
     end
 end
@@ -81,8 +81,6 @@ def display_ingredients
     table = []
     rows = []
     while input < @array_of_recipes[@selection].ingredients.length 
-        # puts @array_of_recipes[@selection].ingredients[input]['quantity'] + " " + @array_of_recipes[@selection].ingredients[input]['name']
-        # puts " "
         rows << [@array_of_recipes[@selection].ingredients[input]['quantity'], @array_of_recipes[@selection].ingredients[input]['name']]
         input += 1
     end
@@ -110,12 +108,30 @@ def cooking_steps
         input += 1
     end
     puts Rainbow("Bon apetit!").yellow
+    puts ""
 end
 
-welcome
+def restart
+    puts "Would you like to try another recipe? (y/n)"
+    yes_no = gets.strip
+    if yes_no == "y"
+        app_logic
+    else
+        puts "Thanks for using the Cooking App!  See you next time"
+        puts ""
+    end
+end
 
-print_recipe_names
-puts "------------------------------------"
-recipe_select
-display_ingredients
-cooking_steps
+
+def app_logic
+    welcome
+    print_recipe_names
+    puts "------------------------------------"
+    recipe_select
+    display_ingredients
+    cooking_steps
+    restart
+end
+
+app_logic
+
