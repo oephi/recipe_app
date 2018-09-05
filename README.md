@@ -41,8 +41,8 @@ Enjoy!
 
 
 #  Screenshots
-![screenshot1](docs/screenshot2.jpg)
-![screenshot2](docs/screenshot1.jpg)
+![screenshot1](docs/screenshot2.png)
+![screenshot2](docs/screenshot1.png)
 
 
 # The Experience
@@ -59,7 +59,7 @@ This is our work plan and trello boards:
 ![trello2](docs/trello2.png)
 ![trello3](docs/trello3.png)
 ![trello](docs/trello4.png)
-![trello](docs/trello print.png)
+![trello](docs/trello_print.png)
 
 
 
