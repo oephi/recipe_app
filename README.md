@@ -58,8 +58,8 @@ This is our work plan and trello boards:
 ![trello](docs/trello1.png)
 ![trello2](docs/trello2.png)
 ![trello3](docs/trello3.png)
-![trello](docs/trello4.png)
-![trello](docs/trello_print.png)
+![trello4](docs/trello4.png)
+![trello5](docs/trello_print.png)
 
 
 
