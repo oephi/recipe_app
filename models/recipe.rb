@@ -1,9 +1,4 @@
 class Recipe
-    # def initialize name, ingredients, steps
-    #     @name = name
-    #     @ingredients = ingredients
-    #     @steps = steps    
-    # end
     attr_reader :name, :ingredients, :steps
     
     def initialize recipe
@@ -18,12 +13,15 @@ class Recipe
         @time.each do |i|
             new_time += i
         end
-        p new_time
+        puts Rainbow("Estimated time for dish is #{new_time} mins").orange
+        puts ""
     end
 
     def ingredients
         @ingredients
     end
+
+    
 
 
 end

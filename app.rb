@@ -1,6 +1,7 @@
 require 'json'
 require_relative 'models/recipe'
 require 'rainbow'
+require 'tty-markdown'
 # require_relative 'logic'
 
 hash = JSON.parse(File.read('recipes.json'))
@@ -31,54 +32,79 @@ def print_recipe_names
             puts "#{@number}" + "."" #{i.name}"
             @number += 1
             @numbers_array << @number
-
         end
         @numbers_array.pop
 end
 
-def print_recipe
-    puts "Please select from the following recipes: "
-    puts "------------------------------"
+def return_input(input)
+    system "clear"
+    puts Rainbow(input).red
+    print_recipe_names
+    puts "------------------------------------"
+    recipe_select
 end
 
 def recipe_select
     puts "What is your selection?"
-    selection = gets.to_i
+    @selection = gets.to_i
     system "clear"
         @numbers_array.each do |number|
-        if number == selection
-            selection -= 1
-            puts "You selected: #{@array_of_recipes[selection].name}! Correct? (y/n)"
-            yes_no = gets.chomp
+        if number == @selection
+            @selection -= 1
+            puts "You selected: #{@array_of_recipes[@selection].name}! Correct? (y/n)"
+            yes_no = gets.strip
             if yes_no == "y"
-                puts "Ok! Let's get cook it!"
+                puts "Ok! Let's get cook it!  Please press enter to see ingredients"
+                gets
+                system "clear"
             elsif yes_no == "n"
-                system "clear"
-                print_recipe_names
-                puts "------------------------------------"
-                recipe_select
+                return_input("")
             else
-                system "clear"
-                puts Rainbow("Invalid Selection.  Please try again").red
-                print_recipe_names
-                puts "------------------------------------"
-                recipe_select
+               return_input("Please try again")
             end
-        elsif selection > @numbers_array.length
-            system "clear"
-            puts Rainbow("Invalid Selection.  Please try again").red
-            print_recipe_names
-            puts "------------------------------------"
-            recipe_select
+            ## Broken, please fix
+        elsif @selection > @numbers_array.length
+            return_input("Invalid selection please try again")
         end
     end
 end
 
+def display_ingredients
+    puts "INGREDIENTS FOR #{@array_of_recipes[@selection].name}"
+    puts ""
+    input = 0
+    while input < @array_of_recipes[@selection].ingredients.length 
+        puts @array_of_recipes[@selection].ingredients[input]['quantity'] + " " + @array_of_recipes[@selection].ingredients[input]['name']
+        puts " "
+        input += 1
+    end
+    @array_of_recipes[@selection].time
+end
+
+def cooking_steps
+    input = 0 
+    while input < @array_of_recipes[@selection].steps.length
+        if input == 0
+            input = 1
+        else
+            input
+        end
+        puts "Step #{input} of #{@array_of_recipes[@selection].steps.length - 1}" 
+        puts Rainbow(@array_of_recipes[@selection].steps[input]).blue.bg(:white)
+        puts ""
+        puts "Press enter for next step"    
+        gets
+        system "clear"
+        display_ingredients
+        input += 1
+    end
+    puts Rainbow("Bon apetit!").yellow
+end
+
 welcome
 
-# puts "Please select from the following recipes: "
-# puts "-----------------------------------"
 print_recipe_names
 puts "------------------------------------"
 recipe_select
-
+display_ingredients
+cooking_steps
