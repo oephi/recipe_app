@@ -50,7 +50,7 @@ Enjoy!
 This was a really great experience.  This was Jessica's idea and once I realised we would be wrangling Json data, I jumped all over it.  We had loads of hiccups, lots of troubleshooting, and we succeeded.  Paired programming at it's finest.
 
 Here is our initial thoughts and design ideas
-![brainstorming_sesh1](docs/Screenshot_20180905-153635.png)
+![brainstorming_sesh1](docs/brainstorm.png)
 ![brainstorming_sesh2](docs/IMG_9524.JPG)
 
 
