@@ -41,8 +41,8 @@ Enjoy!
 
 
 #  Screenshots
-![screenshot1]('docs/screenshot2.jpg')
-![screenshot2]('docs/screenshot1.jpg')
+![screenshot1](docs/screenshot2.jpg)
+![screenshot2](docs/screenshot1.jpg)
 
 
 # The Experience
@@ -50,16 +50,16 @@ Enjoy!
 This was a really great experience.  This was Jessica's idea and once I realised we would be wrangling Json data, I jumped all over it.  We had loads of hiccups, lots of troubleshooting, and we succeeded.  Paired programming at it's finest.
 
 Here is our initial thoughts and design ideas
-![brainstorming_sesh1]('docs/Screenshot_20180905-153635.png')
-![brainstorming_sesh2]('docs/IMG_9524.JPG')
+![brainstorming_sesh1](docs/Screenshot_20180905-153635.png)
+![brainstorming_sesh2](docs/IMG_9524.JPG)
 
 
 This is our work plan and trello boards:
-![trello]('docs/Screen Shot 2018-09-04 at 8.42.51 pm.png')
-![trello2]('docs/Screen Shot 2018-09-04 at 8.48.27 pm.png')
-![trello3]('docs/Screen Shot 2018-09-05 at 10.46.25 am.png')
-![trello]('docs/Screen Shot 2018-09-05 at 11.23.59 am.png')
-![trello]('docs/trello print.png')
+![trello](docs/Screen Shot 2018-09-04 at 8.42.51 pm.png)
+![trello2](docs/Screen Shot 2018-09-04 at 8.48.27 pm.png)
+![trello3](docs/Screen Shot 2018-09-05 at 10.46.25 am.png)
+![trello](docs/Screen Shot 2018-09-05 at 11.23.59 am.png)
+![trello](docs/trello print.png)
 
 
 
