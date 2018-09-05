@@ -1,3 +1,5 @@
+## Recipe class and class methods
+
 class Recipe
     attr_reader :name, :ingredients, :steps
     
@@ -20,8 +22,4 @@ class Recipe
     def ingredients
         @ingredients
     end
-
-    
-
-
 end

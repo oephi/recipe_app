@@ -1,3 +1,5 @@
+## Application logic
+
 require 'json'
 require_relative 'models/recipe'
 require 'rainbow'
@@ -5,11 +7,13 @@ require 'terminal-table'
 
 hash = JSON.parse(File.read('recipes.json'))
 
+## creates instances of the Recipe class and passes them into an array to be used in the initialization of the Recipe class
 @array_of_recipes = []
 hash.each do |recipe|
     @array_of_recipes << Recipe.new(recipe)
 end
 
+## Calls the initial welcome screen
 def welcome
     system "clear"
     puts "Welcome to the Cooking App, home chefs!"
@@ -19,6 +23,7 @@ def welcome
     system "clear"
 end
 
+## Calls the array of recipes created above and displays them to the user in a numbered table
 def print_recipe_names
     puts "Please select from the following recipes: "
     puts " "
@@ -36,6 +41,7 @@ def print_recipe_names
 
 end
 
+## Used in the control flow of the recipe_select method to keep code DRY
 def return_input(input)
     system "clear"
     puts Rainbow(input).red
@@ -43,13 +49,13 @@ def return_input(input)
     puts "------------------------------------"
 end
 
+## Control flow used for the selection of the recipe
 def recipe_select
     while true
         puts "What is your selection?"
         @selection = gets.to_i
         @selection -= 1
         system "clear"
-        # p @selection
         @numbers_array.each do |number|
             if number == @selection
                 puts "You selected: #{@array_of_recipes[@selection].name}! Correct? (y/n)"
@@ -63,9 +69,7 @@ def recipe_select
                     return_input("") 
                 else
                     return_input("Please try again")
-                end
-                
-                ## Broken, please fix
+                end               
             elsif  @selection > @numbers_array.length || @selection <= 0 
                  return_input("Invalid selection please try again")
             end
@@ -73,6 +77,8 @@ def recipe_select
     end
 end
 
+
+## iterates through ingredients of current Recipe instance and passes them into a table
 def display_ingredients
     puts "INGREDIENTS FOR #{@array_of_recipes[@selection].name}"
     puts ""
@@ -89,6 +95,8 @@ def display_ingredients
     puts ""
 end
 
+
+## iterates through the cooking steps and displays them step by step for the user
 def cooking_steps
     input = 0 
     while input < @array_of_recipes[@selection].steps.length
@@ -110,6 +118,7 @@ def cooking_steps
     puts ""
 end
 
+## asks the user if they would like to begin again
 def restart
     puts "Would you like to try another recipe? (y/n)"
     yes_no = gets.strip
@@ -122,6 +131,7 @@ def restart
 end
 
 
+## The logic flow for the execution of the application
 def app_logic
     welcome
     print_recipe_names
